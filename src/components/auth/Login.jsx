@@ -1,21 +1,19 @@
 import React, { useState } from 'react'
 import {Lock,Mail,LockKeyhole} from 'lucide-react'
-const Login = () => {
+const Login = ({handleLogin}) => {
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
 function submithandler(e){
   e.preventDefault()
-  console.log("form submitted")
-  console.log("the email of user is: ",email)
-  console.log("password: ",password)
+ handleLogin(email,password)
   setemail("")
   setpassword("")
 }
   return (
     <div className='flex items-center justify-center h-screen w-full'>
-      <div className=' border-2 border-gray-800 w-100 h-120 shadow-[0_0_60px_rgba(79,70,229,0.12)] bg-[#0F172A] rounded-xl p-10 flex flex-col gap-4'>
+      <div className=' border-2 border-gray-800 w-100 h-120 shadow-[0_2px_8px_rgba(0,0,0,0.15)] bg-[#0F172A] rounded-xl p-10 flex flex-col gap-4'>
           <div className='mx-auto'>
-            <Lock size={48} className='text-violet-500 drop-shadow-[0_0_10px_rgba(124,58,237,0.8)]'/>
+            <Lock size={48} className='text-violet-500 drop-shadow-[0_0_10px_rgba(124,58,237,0.4)]'/>
           </div>
           <div className='mx-auto'>
             <h1 className='text-3xl font-semibold mb-3'>Welcome Back!👋</h1>
@@ -40,7 +38,7 @@ function submithandler(e){
             }}></input>
             </div>
             <div>
-            <button className='w-full shadow-[0_5px_20px_rgba(79,70,229,0.45)] bg-linear-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white py-2 rounded-lg'>Sign In</button>
+            <button className='w-full shadow-[0_5px_15px_rgba(79,70,229,0.18)] bg-linear-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white py-2 rounded-lg'>Sign In</button>
             </div>
             </div>
           </form>
