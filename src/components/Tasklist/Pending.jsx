@@ -1,21 +1,21 @@
 import React from 'react'
 
-const Pending = () => {
+const Pending = ({data}) => {
   return (
-     <div className='flex text-gray-300 gap-65  p-5 bg-[#111827] border border-[#1F2937] rounded-2xl shadow-xl shadow-black/20'>
-        <div>
-          <h1 className='text-lg text-white font-semibold'>Design Login Page UI</h1>
-          <h3>Redesign the login page for better user experience</h3>
+     <div className='flex text-gray-300 justify-between  p-5 bg-[#111827] border border-[#1F2937] rounded-2xl shadow-xl shadow-black/20'>
+        <div className='w-1/3'>
+          <h1 className='text-lg text-white font-semibold'>{data.taskTitle}</h1>
+          <h3>{data.taskDescription}</h3>
         </div>
-        <div>
-          <h1>Priority</h1>
-          <h3 className='bg-green-900/40 text-green-400 px-3 py-1 rounded-full text-sm font-medium'>Low</h3>
+        <div className='flex-col gap-1 flex w-30'>
+          <h1>Category</h1>
+          <h3 className='bg-yellow-900/40 text-yellow-400 px-3 py-1 rounded-full text-sm font-medium'>{data.category}</h3>
         </div>
-        <div>
+        <div className='w-30'>
           <h1>Task Date</h1>
-          <h3>May 26</h3>
+          <h3>{data.taskDate}</h3>
         </div>
-        <div className='flex gap-2'>
+        <div className='flex gap-2 w-40'>
             <button className="px-3 py-1 rounded-md text-sm font-medium
 bg-green-500/10 text-green-400
 border border-green-500/50

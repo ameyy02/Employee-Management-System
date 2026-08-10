@@ -1,21 +1,21 @@
 import React from 'react'
 
-const Completed = () => {
+const Completed = ({data}) => {
   return (
-    <div className='flex text-gray-300 gap-65  p-5 bg-[#111827] border border-[#1F2937] rounded-2xl shadow-xl shadow-black/20'>
-        <div>
-          <h1 className='text-lg text-white font-semibold'>Design Login Page UI</h1>
-          <h3>Redesign the login page for better user experience</h3>
+    <div className='flex w-full text-gray-300 justify-between p-5 bg-[#111827] border border-[#1F2937] rounded-2xl shadow-xl shadow-black/20'>
+        <div className='w-1/3'>
+          <h1 className='text-lg text-white font-semibold'>{data.taskTitle}</h1>
+          <h3>{data.taskDescription}</h3>
         </div>
-        <div>
-          <h1>Priority</h1>
-          <h3 className='bg-red-900/40 text-red-400 px-3 py-1 rounded-full text-sm font-medium'>High</h3>
+        <div className='flex flex-col gap-1 w-30'>
+          <h1>Category</h1>
+          <h3 className='bg-yellow-900/40 text-yellow-400 px-3 py-1 rounded-full text-sm font-medium'>{data.category}</h3>
         </div>
-        <div>
+        <div className='w-30'>
           <h1>Task Date</h1>
-          <h3>May 26</h3>
+          <h3>{data.taskDate}</h3>
         </div>
-        <div>
+        <div className='w-40'>
           <h1>Status</h1>
           <h3 className='text-green-400'>Completed</h3>
         </div>
