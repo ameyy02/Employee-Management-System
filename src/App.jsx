@@ -39,7 +39,7 @@ else{
   return (
     <>
     {!user?<Login handleLogin={handleLogin}/> :''}
-    {user=="admin"?<AdminDashboard/>:(user=="employee"?<EmployeeDashboard data={LoggedInUserData}/>:null)}
+    {user=="admin"?<AdminDashboard changeuser={setuser}/>:(user=="employee"?<EmployeeDashboard changeuser={setuser} data={LoggedInUserData}/>:null)}
     </>
   )
 }

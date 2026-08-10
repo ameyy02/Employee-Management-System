@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Headeradmin = () => {
+const Headeradmin = (props) => {
   function logOut() {
     localStorage.setItem('loggedinuser','')
-    window.location.reload()
+    props.changeuser('')
   }
   return (
     <div className='flex  items-end justify-between'>

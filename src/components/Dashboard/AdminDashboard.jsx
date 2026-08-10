@@ -4,10 +4,10 @@ import Headeradmin from '../others/Headeradmin'
 import {NotebookPen} from 'lucide-react'
 import Createtask from '../others/Createtask'
 import { TasksbyAdmin } from '../others/TasksbyAdmin'
-const AdminDashboard = () => {
+const AdminDashboard = ({changeuser}) => {
   return (
     <div className='p-7 '>
-        <Headeradmin/>
+        <Headeradmin changeuser={changeuser}/>
         <Createtask/>
         <TasksbyAdmin/>
     </div>
