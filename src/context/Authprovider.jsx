@@ -4,22 +4,31 @@ import { getLocalStorage, setLocalStorage } from '../utils/Localstorage'
 export const Authcontext = createContext()
 
 const Authprovider = ({ children }) => {
+
     const [userdata, setuserdata] = useState(null)
 
     useEffect(() => {
-        // Creates initial data only if localStorage is empty
+
+        console.log("Authprovider running")
+
+        // Create initial localStorage data
         setLocalStorage()
 
+        // Get data from localStorage
         const { employee, admin } = getLocalStorage()
+
+        console.log("Employee data:", employee)
+        console.log("Admin data:", admin)
 
         setuserdata({
             employee,
             admin
         })
+
     }, [])
 
-    // Update employee data everywhere
     const updateEmployeeData = (updatedEmployees) => {
+
         localStorage.setItem(
             'employee',
             JSON.stringify(updatedEmployees)
@@ -31,7 +40,6 @@ const Authprovider = ({ children }) => {
         }))
     }
 
-    // Update a particular task
     const updateTask = (employeeId, taskIndex, updatedTask) => {
 
         if (!userdata) return
@@ -43,6 +51,7 @@ const Authprovider = ({ children }) => {
             }
 
             const updatedTasks = employee.tasks.map((task, index) => {
+
                 if (index === taskIndex) {
                     return updatedTask
                 }
@@ -50,7 +59,6 @@ const Authprovider = ({ children }) => {
                 return task
             })
 
-            // Recalculate task numbers
             const taskNumbers = {
                 active: updatedTasks.filter(task => task.active).length,
                 newTask: updatedTasks.filter(task => task.newTask).length,
