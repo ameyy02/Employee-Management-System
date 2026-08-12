@@ -47,3 +47,17 @@ src/
 ├── App.jsx
 ├── index.css
 └── main.jsx
+
+## Screenshots
+
+### Login
+
+![Login](public/screenshots/login.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](public/screenshots/admin-dashboard.png)
+
+### Employee Dashboard
+
+![Employee Dashboard](public/screenshots/employee-dashboard.png)
