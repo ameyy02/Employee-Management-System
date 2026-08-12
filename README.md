@@ -2,6 +2,10 @@
 
 A task management dashboard built with React and Tailwind CSS, featuring separate dashboards for administrators and employees.
 
+## 🔗 Live Demo
+
+[View Live Demo](http://employee-management-system-seven-umber.vercel.app/)
+
 ## 🚀 Features
 
 ### Admin Dashboard
