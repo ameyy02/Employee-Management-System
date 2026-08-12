@@ -56,12 +56,12 @@ src/
 
 ### Login
 
-![Login](public/screenshots/login.png)
+![Login](./public/screenshots/login.png)
 
 ### Admin Dashboard
 
-![Admin Dashboard](public/screenshots/admin-dashboard.png)
+![Admin Dashboard](./public/screenshots/admin-dashboard.png)
 
 ### Employee Dashboard
 
-![Employee Dashboard](public/screenshots/employee-dashboard.png)
+![Employee Dashboard](./public/screenshots/employee-dashboard.png)
