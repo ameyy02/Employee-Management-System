@@ -2,13 +2,23 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import {pool} from './db.js'
+import authRoutes from "./routes/authroutes.js";
+import { authenticate } from "./middleware/authMiddleware.js";
+import { authorize } from "./middleware/roleMiddleware.js";
 dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.get("/api/admin-only",authenticate,authorize("admin"),(req,res)=>{res.json({
+    message:"welcome admin",
+    user: req.user
+})})
+app.get("/api/employee-only",authenticate,authorize("employee"),(req,res)=>{res.json({
+    message:"welcome employee",
+    user: req.user
+})})
 app.get("/", (req, res) => {
     res.json({
         message: "Employee Management API is running"
@@ -28,6 +38,13 @@ app.get("/api/testdb",async (req,res)=>{
         })
     }
 })
+app.get("/api/protected", authenticate, (req, res) => {
+    res.json({
+        message: "You accessed a protected route",
+        user: req.user
+    });
+});
+app.use('/api/auth',authRoutes)
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
