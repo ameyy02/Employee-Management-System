@@ -5,6 +5,7 @@ import {pool} from './db.js'
 import authRoutes from "./routes/authroutes.js";
 import { authenticate } from "./middleware/authMiddleware.js";
 import { authorize } from "./middleware/roleMiddleware.js";
+import taskroutes from "./routes/taskroutes.js";
 dotenv.config();
 
 const app = express();
@@ -45,6 +46,7 @@ app.get("/api/protected", authenticate, (req, res) => {
     });
 });
 app.use('/api/auth',authRoutes)
+app.use("/api/tasks", taskroutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
