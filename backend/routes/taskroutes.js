@@ -1,5 +1,5 @@
 import express from "express";
-import { createTask, getMyTasks, updateTaskStatus } from "../controllers/taskcontroller.js";
+import { createTask, getAllTasks, getMyTasks, updateTaskStatus } from "../controllers/taskcontroller.js";
 import { authenticate } from "../middleware/authMiddleware.js";
 import { authorize } from "../middleware/roleMiddleware.js";
 
@@ -10,6 +10,12 @@ router.post(
     authenticate,
     authorize("admin"),
     createTask
+);
+router.get(
+    "/",
+    authenticate,
+    authorize("admin"),
+    getAllTasks
 );
 router.get(
     "/my-tasks",

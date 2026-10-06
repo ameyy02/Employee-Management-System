@@ -123,3 +123,33 @@ export const updateTaskStatus= async(req,res)=>{
     })
 }
 }
+
+export const getAllTasks=async(req,res)=>{
+    try{
+        const result=await pool.query(`
+            SELECT tasks.id,
+            tasks.title,
+            tasks.description,
+            tasks.task_date,
+            tasks.category,
+            tasks.status,
+            tasks.employee_id,
+            tasks.created_at,
+            users.first_name AS employee_name,
+            users.email AS employee_email
+            FROM tasks JOIN users 
+            ON tasks.employee_id=users.id 
+            ORDER BY tasks.created_at DESC
+            `);
+            return res.json({
+                message:"tasks fetched successfully",
+                tasks:result.rows
+            })
+    }catch(error){
+        console.error("Get all tasks error:", error);
+
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+}

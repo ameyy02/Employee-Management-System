@@ -19,6 +19,8 @@ export const login= async (req,res)=>{
             })
         }
         const user=result.rows[0]
+        console.log("Password:", password);
+console.log("Hash:", user.password_hash);
         const ispassword=await bcrypt.compare(password,user.password_hash)
         if(!ispassword){
             res.status(401).json({
