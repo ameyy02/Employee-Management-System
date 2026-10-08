@@ -1,12 +1,9 @@
-import React, { useContext, useState } from 'react'
+import  { useState } from 'react'
 import Login from './components/auth/Login'
 import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
 import AdminDashboard from './components/Dashboard/AdminDashboard'
-import { Authcontext } from './context/Authprovider'
 
 const App = () => {
-
-    const authdata = useContext(Authcontext)
 
     const [user, setuser] = useState(() => {
         const loggedInUser = localStorage.getItem('loggedinuser')
@@ -19,92 +16,88 @@ const App = () => {
         return null
     })
 
-    const [loggedInEmail, setLoggedInEmail] = useState(() => {
+    const [loggedInUserData, setLoggedInUserData] = useState(() => {
         const loggedInUser = localStorage.getItem('loggedinuser')
 
         if (loggedInUser) {
-            const userData = JSON.parse(loggedInUser)
-            return userData.email
+            return JSON.parse(loggedInUser)
         }
 
         return null
     })
 
-    const handleLogin = (email, password) => {
 
-        if (!authdata) return
+    const handleLogin = async (email, password) => {
 
-        // Check admin
-        const admin = authdata.admin.find(
-            (admin) =>
-                admin.email === email &&
-                admin.password === password
-        )
+        try {
 
-        if (admin) {
+            const response = await fetch(
+                "http://localhost:5000/api/auth/login",
+                {
+                    method: "POST",
 
-            setuser('admin')
-            setLoggedInEmail(null)
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
-            localStorage.setItem(
-                'loggedinuser',
-                JSON.stringify({
-                    role: 'admin'
-                })
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                }
             )
 
-            return
-        }
+            const data = await response.json()
 
-        // Check employee
-        const employee = authdata.employee.find(
-            (employee) =>
-                employee.email === email &&
-                employee.password === password
-        )
+            if (!response.ok) {
+                alert(data.message)
+                return
+            }
 
-        if (employee) {
-
-            setuser('employee')
-            setLoggedInEmail(employee.email)
-
+            // Store JWT
             localStorage.setItem(
-                'loggedinuser',
-                JSON.stringify({
-                    role: 'employee',
-                    email: employee.email
-                })
+                "token",
+                data.token
             )
 
-            return
+            // Store logged-in user
+            localStorage.setItem(
+                "loggedinuser",
+                JSON.stringify(data.user)
+            )
+
+            // Set role
+            setuser(data.user.role)
+
+            // Store user data
+            setLoggedInUserData(data.user)
+
+        } catch (error) {
+
+            console.error("Login error:", error)
+
+            alert("Unable to connect to server")
         }
-
-        alert('Invalid credentials')
     }
 
-    // Get the LATEST employee from AuthContext
-    const loggedInEmployee = authdata?.employee?.find(
-        (employee) => employee.email === loggedInEmail
-    )
 
-    if (!authdata) {
-        return null
+    if (!user) {
+        return <Login handleLogin={handleLogin} />
     }
+
 
     return (
         <>
-            {!user && (
-                <Login handleLogin={handleLogin} />
-            )}
-
             {user === 'admin' && (
-                <AdminDashboard changeuser={setuser} />
+                <AdminDashboard
+                    changeuser={setuser}
+                />
             )}
 
-            {user === 'employee' && loggedInEmployee && (
+            {user === 'employee' && loggedInUserData && (
                 <EmployeeDashboard
                     changeuser={setuser}
-                    data={loggedInEmployee}
+                    data={loggedInUserData}
                 />
             )}
         </>

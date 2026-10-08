@@ -1,25 +1,21 @@
-import React, { useContext } from 'react'
-import { Authcontext } from '../../context/Authprovider'
+import { updateTaskStatus } from '../../utils/api'
 
-const Newtask = ({ data, employeeId, taskIndex }) => {
+const Newtask = ({ data, onStatusUpdate }) => {
+const handleAcceptTask = async () => {
 
-    const { updateTask } = useContext(Authcontext)
+        try {
 
-    function acceptTask() {
+            await updateTaskStatus(data.id, "active")
 
-        const updatedTask = {
-            ...data,
-            active: true,
-            newTask: false,
-            completed: false,
-            failed: false
+            onStatusUpdate(data.id, "active")
+
+        } catch (error) {
+
+            console.error("Failed to accept task:", error)
+
+            alert(error.message)
+
         }
-
-        updateTask(
-            employeeId,
-            taskIndex,
-            updatedTask
-        )
     }
 
     return (
@@ -27,11 +23,11 @@ const Newtask = ({ data, employeeId, taskIndex }) => {
 
             <div>
                 <h1 className="text-lg text-white font-semibold">
-                    {data.taskTitle}
+                    {data.title}
                 </h1>
 
                 <h3 className="text-gray-400">
-                    {data.taskDescription}
+                    {data.description}
                 </h3>
             </div>
 
@@ -45,11 +41,11 @@ const Newtask = ({ data, employeeId, taskIndex }) => {
 
             <div>
                 <h1>Task Date</h1>
-                <h3>{data.taskDate}</h3>
+                <h3>{data.task_date?.split('T')[0]}</h3>
             </div>
 
             <button
-                onClick={acceptTask}
+                onClick={handleAcceptTask}
                 className="px-3 py-2 rounded-md text-sm font-medium bg-green-500/10 text-green-400 border border-green-500/50 hover:bg-green-500/20 transition-all duration-200"
             >
                 Accept Task

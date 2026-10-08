@@ -1,11 +1,12 @@
 import bcrypt from 'bcrypt'
 import {pool} from '../db.js'
 import jwt from 'jsonwebtoken'
+
 export const login= async (req,res)=>{
     try{
         const {email,password}=req.body;
         if(!email||!password){
-            res.status(400).json({
+            return res.status(400).json({
                 message:"email and password are required"
             })
         }
@@ -14,7 +15,7 @@ export const login= async (req,res)=>{
             WHERE email=$1
             `,[email])
         if(result.rows.length==0){
-            res.status(401).json({
+            return res.status(401).json({
                 message:"invalid email or password"
             })
         }
@@ -23,7 +24,7 @@ export const login= async (req,res)=>{
 console.log("Hash:", user.password_hash);
         const ispassword=await bcrypt.compare(password,user.password_hash)
         if(!ispassword){
-            res.status(401).json({
+            return res.status(401).json({
                 message:"invalid email or password"
             })
         }

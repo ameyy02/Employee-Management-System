@@ -9,7 +9,7 @@ import taskroutes from "./routes/taskroutes.js";
 dotenv.config();
 
 const app = express();
-
+console.log("JWT SECRET:", process.env.JWT_SECRET);
 app.use(cors());
 app.use(express.json());
 app.get("/api/admin-only",authenticate,authorize("admin"),(req,res)=>{res.json({

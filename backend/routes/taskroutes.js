@@ -1,5 +1,5 @@
 import express from "express";
-import { createTask, getAllTasks, getMyTasks, updateTaskStatus } from "../controllers/taskcontroller.js";
+import { createTask, deleteTask, getAllTasks, getEmployees, getMyTasks, updateTaskStatus } from "../controllers/taskcontroller.js";
 import { authenticate } from "../middleware/authMiddleware.js";
 import { authorize } from "../middleware/roleMiddleware.js";
 
@@ -10,6 +10,18 @@ router.post(
     authenticate,
     authorize("admin"),
     createTask
+);
+router.get(
+    "/employees",
+    authenticate,
+    authorize("admin"),
+    getEmployees
+);
+router.delete(
+    "/:id",
+    authenticate,
+    authorize("admin"),
+    deleteTask
 );
 router.get(
     "/",
