@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Failed = ({ data }) => {
     return (
@@ -6,11 +5,11 @@ const Failed = ({ data }) => {
 
             <div>
                 <h1 className="text-lg text-white font-semibold">
-                    {data.taskTitle}
+                    {data.title}
                 </h1>
 
                 <h3 className="text-gray-400">
-                    {data.taskDescription}
+                    {data.description}
                 </h3>
             </div>
 
@@ -24,7 +23,7 @@ const Failed = ({ data }) => {
 
             <div>
                 <h1>Task Date</h1>
-                <h3>{data.taskDate}</h3>
+                <h3>{data.task_date?.split('T')[0]}</h3>
             </div>
 
             <div>

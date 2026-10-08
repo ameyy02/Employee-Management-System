@@ -1,0 +1,13 @@
+import pg from "pg";
+import dotenv from "dotenv";
+dotenv.config();
+const {Pool}=pg;
+export const pool=new Pool({
+    connectionString:process.env.DATABASE_URL
+});
+pool.on("connect",()=>{
+    console.log("postgress sql connected")
+})
+pool.on("error",(err)=>{
+    console.log("error: ",err)
+})
