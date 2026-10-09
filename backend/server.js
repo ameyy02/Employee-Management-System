@@ -10,10 +10,11 @@ dotenv.config();
 
 const app = express();
 console.log("JWT SECRET:", process.env.JWT_SECRET);
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://employee-management-system-amey-pawar.vercel.app",
-  "https://employee-management-system-seven-umber.vercel.app/"
+  "https://employee-management-system-seven-umber.vercel.app"
 ];
 
 app.use(cors({
@@ -21,6 +22,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 app.use(express.json());
 app.use('/api/auth',authRoutes)
