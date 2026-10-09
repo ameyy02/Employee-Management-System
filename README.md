@@ -10,13 +10,13 @@ A full-stack Employee Management System built with React, Node.js, Express.js, a
 ## 📸 Screenshots
 
 ### Login Page
-![Login Page](./screenshots/login.png)
+![Login Page](./public/screenshots/login.png)
 
 ### Admin Dashboard
-![Admin Dashboard](./screenshots/admin-dashboard.png)
+![Admin Dashboard](./public/screenshots/admin-dashboard.png)
 
 ### Employee Dashboard
-![Employee Dashboard](./screenshots/employee-dashboard.png)
+![Employee Dashboard](./public/screenshots/employee-dashboard.png)
 
 ## 📌 About The Project
 
