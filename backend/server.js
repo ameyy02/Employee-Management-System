@@ -10,10 +10,15 @@ dotenv.config();
 
 const app = express();
 console.log("JWT SECRET:", process.env.JWT_SECRET);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://employee-management-system-amey-pawar.vercel.app"
+];
+
 app.use(cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
