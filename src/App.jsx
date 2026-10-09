@@ -2,7 +2,6 @@ import  { useState } from 'react'
 import Login from './components/auth/Login'
 import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
 import AdminDashboard from './components/Dashboard/AdminDashboard'
-
 const App = () => {
 
     const [user, setuser] = useState(() => {
@@ -31,9 +30,7 @@ const App = () => {
 
         try {
 
-            const response = await fetch(
-                "http://localhost:5000/api/auth/login",
-                {
+            const response = await fetch("https://employee-management-backend-hwsy.onrender.com/api/auth/login", {
                     method: "POST",
 
                     headers: {

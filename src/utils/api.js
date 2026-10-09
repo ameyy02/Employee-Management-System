@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://employee-management-backend-hwsy.onrender.com/api";
 export const getMyTasks= async()=>{
     const token=localStorage.getItem("token");
     const response=await fetch(`${API_URL}/tasks/my-tasks`,

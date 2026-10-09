@@ -10,8 +10,15 @@ dotenv.config();
 
 const app = express();
 console.log("JWT SECRET:", process.env.JWT_SECRET);
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json());
+app.use('/api/auth',authRoutes)
+app.use("/api/tasks", taskroutes);
 app.get("/api/admin-only",authenticate,authorize("admin"),(req,res)=>{res.json({
     message:"welcome admin",
     user: req.user
@@ -45,8 +52,7 @@ app.get("/api/protected", authenticate, (req, res) => {
         user: req.user
     });
 });
-app.use('/api/auth',authRoutes)
-app.use("/api/tasks", taskroutes);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
