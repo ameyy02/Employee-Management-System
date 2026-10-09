@@ -9,8 +9,6 @@ import taskroutes from "./routes/taskroutes.js";
 dotenv.config();
 
 const app = express();
-console.log("JWT SECRET:", process.env.JWT_SECRET);
-
 const allowedOrigins = [
   "http://localhost:5173",
   "https://employee-management-system-amey-pawar.vercel.app",
